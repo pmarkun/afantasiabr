@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Você Tem Afantasia? Teste e Descubra | Questionário VVIQ em Português</title>
+    <meta name="description" content="Não consegue visualizar imagens na mente? Descubra se você tem afantasia através do teste VVIQ em português. Entenda por que sua imaginação funciona diferente.">
+    <meta name="keywords" content="afantasia, teste afantasia, VVIQ, não consigo visualizar, imaginação visual, imagens mentais">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-bg: #fdfbf7;
+            --color-surface: #ffffff;
+            --color-primary: #2d5f7f;
+            --color-accent: #d4745f;
+            --color-text: #2a2a2a;
+            --color-text-muted: #666666;
+            --color-border: #e5dfd5;
+            --color-light-accent: #f4e8e3;
+            --font-display: 'Crimson Pro', serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        .grain-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.015;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulance type='fractalNoise' baseFrequency='2.5' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            z-index: 1000;
+            mix-blend-mode: multiply;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 4rem 2rem;
+            position: relative;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(212, 116, 95, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(45, 95, 127, 0.08) 0%, transparent 50%),
+                var(--color-bg);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--color-accent), transparent);
+            opacity: 0;
+            animation: slideIn 1.5s ease-out 0.5s forwards;
+        }
+
+        @keyframes slideIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .hero-content {
+            max-width: 900px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-label {
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--color-accent);
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+            animation: fadeIn 1s ease-out 0.3s backwards;
+        }
+
+        h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 8vw, 5.5rem);
+            font-weight: 700;
+            color: var(--color-primary);
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            animation: fadeInUp 1s ease-out 0.4s backwards;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 3vw, 1.5rem);
+            color: var(--color-text-muted);
+            font-weight: 300;
+            font-style: italic;
+            font-family: var(--font-display);
+            margin-bottom: 3rem;
+            animation: fadeInUp 1s ease-out 0.6s backwards;
+        }
+
+        .section {
+            padding: 6rem 2rem;
+            position: relative;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 5vw, 3rem);
+            color: var(--color-primary);
+            margin-bottom: 2rem;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--color-accent);
+        }
+
+        .explanation {
+            background: var(--color-surface);
+            border-left: 4px solid var(--color-accent);
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 4px 20px rgba(45, 95, 127, 0.08);
+        }
+
+        .explanation p {
+            margin-bottom: 1.2rem;
+            font-size: 1.05rem;
+        }
+
+        .explanation p:last-child {
+            margin-bottom: 0;
+        }
+
+        .explanation strong {
+            color: var(--color-primary);
+            font-weight: 600;
+        }
+
+        .quiz-container {
+            background: var(--color-surface);
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(45, 95, 127, 0.1);
+            margin-bottom: 2rem;
+            border: 1px solid var(--color-border);
+        }
+
+        .quiz-intro {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .quiz-intro p {
+            color: var(--color-text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .question {
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: var(--color-light-accent);
+            border-radius: 8px;
+            border: 1px solid var(--color-border);
+            transition: all 0.3s ease;
+        }
+
+        .question:hover {
+            border-color: var(--color-accent);
+            box-shadow: 0 4px 15px rgba(212, 116, 95, 0.1);
+        }
+
+        .question-text {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: var(--color-primary);
+            font-weight: 500;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            background: var(--color-surface);
+            border: 2px solid var(--color-border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.95rem;
+        }
+
+        .option:hover {
+            background: rgba(212, 116, 95, 0.08);
+            border-color: var(--color-accent);
+            transform: translateX(4px);
+        }
+
+        .option input[type="radio"] {
+            margin-right: 1rem;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: var(--color-accent);
+        }
+
+        .option.selected {
+            background: rgba(212, 116, 95, 0.12);
+            border-color: var(--color-accent);
+        }
+
+        .btn-calculate {
+            width: 100%;
+            padding: 1.2rem;
+            background: linear-gradient(135deg, var(--color-primary), #3d7fa1);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-family: var(--font-body);
+            box-shadow: 0 4px 15px rgba(45, 95, 127, 0.3);
+        }
+
+        .btn-calculate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(45, 95, 127, 0.4);
+        }
+
+        .btn-calculate:active {
+            transform: translateY(0);
+        }
+
+        .result {
+            margin-top: 2rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(45, 95, 127, 0.08), rgba(212, 116, 95, 0.08));
+            border-radius: 12px;
+            border: 2px solid var(--color-accent);
+            display: none;
+        }
+
+        .result.show {
+            display: block;
+            animation: fadeInUp 0.5s ease-out;
+        }
+
+        .result h3 {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            color: var(--color-primary);
+            margin-bottom: 1rem;
+        }
+
+        .result-score {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--color-accent);
+            margin-bottom: 1rem;
+            font-family: var(--font-display);
+        }
+
+        .result-interpretation {
+            color: var(--color-text);
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .user-form {
+            margin-top: 2rem;
+            padding: 2rem;
+            background: var(--color-light-accent);
+            border-radius: 12px;
+            border: 2px solid var(--color-accent);
+            display: none;
+        }
+
+        .user-form.show {
+            display: block;
+            animation: fadeInUp 0.5s ease-out;
+        }
+
+        .user-form h3 {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            color: var(--color-primary);
+            margin-bottom: 1rem;
+        }
+
+        .user-form p {
+            color: var(--color-text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--color-text);
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.9rem;
+            border: 2px solid var(--color-border);
+            border-radius: 8px;
+            font-family: var(--font-body);
+            font-size: 1rem;
+            background: var(--color-surface);
+            color: var(--color-text);
+            transition: all 0.2s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--color-accent);
+            box-shadow: 0 0 0 3px rgba(212, 116, 95, 0.1);
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 1.2rem;
+            background: linear-gradient(135deg, var(--color-accent), #e68a78);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-family: var(--font-body);
+            box-shadow: 0 4px 15px rgba(212, 116, 95, 0.3);
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(212, 116, 95, 0.4);
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, var(--color-light-accent), rgba(45, 95, 127, 0.05));
+            padding: 4rem 2rem;
+            text-align: center;
+            border-top: 1px solid var(--color-border);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .cta-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .cta-title {
+            font-family: var(--font-display);
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            color: var(--color-primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-description {
+            color: var(--color-text-muted);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .whatsapp-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.2rem 2.5rem;
+            background: #25D366;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 25px rgba(37, 211, 102, 0.4);
+        }
+
+        .whatsapp-btn:hover {
+            background: #20ba5a;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 35px rgba(37, 211, 102, 0.5);
+        }
+
+        .whatsapp-icon {
+            width: 28px;
+            height: 28px;
+            fill: currentColor;
+        }
+
+        .references-section {
+            padding: 5rem 2rem;
+        }
+
+        .references-grid {
+            display: grid;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .reference-card {
+            background: var(--color-surface);
+            padding: 2rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--color-accent);
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(45, 95, 127, 0.08);
+        }
+
+        .reference-card:hover {
+            transform: translateX(8px);
+            box-shadow: 0 4px 20px rgba(45, 95, 127, 0.15);
+        }
+
+        .reference-card h3 {
+            color: var(--color-primary);
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .reference-card p {
+            color: var(--color-text-muted);
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .reference-card a {
+            color: var(--color-accent);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .reference-card a:hover {
+            color: #ff8fb3;
+            gap: 0.8rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: var(--color-text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--color-border);
+        }
+
+        @media (max-width: 768px) {
+            .section {
+                padding: 4rem 1.5rem;
+            }
+
+            .quiz-container {
+                padding: 2rem 1.5rem;
+            }
+
+            .explanation {
+                padding: 1.5rem;
+            }
+
+            .question {
+                padding: 1.5rem;
+            }
+
+            .option {
+                padding: 0.8rem 1rem;
+            }
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
+        }
+
+        .scroll-indicator svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--color-accent);
+            opacity: 0.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="grain-overlay"></div>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-label">Descubra Agora</div>
+            <h1>Você Tem Afantasia?</h1>
+            <p class="hero-subtitle">Não consegue visualizar imagens na sua mente? Você não está sozinho.</p>
+        </div>
+        <div class="scroll-indicator">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Você não consegue visualizar imagens mentalmente?</h2>
+            <div class="explanation">
+                <p>Quando alguém pede para você <strong>imaginar uma maçã vermelha</strong>, uma praia ou o rosto de alguém querido, o que acontece? A maioria das pessoas consegue "ver" essas imagens na mente, como se estivessem projetadas em uma tela mental interna.</p>
+                
+                <p><strong>Mas e se para você não aparecer nada?</strong> E se, ao invés de uma imagem, você apenas "sabe" que está pensando em uma maçã, mas não consegue realmente vê-la? Isso tem um nome: <strong>afantasia</strong>.</p>
+                
+                <p>A afantasia é a <strong>incapacidade de criar imagens mentais voluntárias</strong>. Não é uma doença, não afeta sua inteligência ou memória — é simplesmente uma forma diferente de processar pensamentos. Você pode ter memórias, criatividade e imaginação conceitual, mas sem o componente visual que a maioria das pessoas experimenta.</p>
+                
+                <p>Muitas pessoas passam a vida inteira sem saber que sua experiência mental é diferente da maioria. Elas podem achar que "imagine uma praia" é apenas uma expressão abstrata, não percebendo que outras pessoas literalmente <em>veem</em> a praia na mente.</p>
+                
+                <p>Estima-se que <strong>2-5% da população mundial</strong> tenha afantasia. Se você suspeita que pode ter, o teste VVIQ abaixo pode ajudar a confirmar.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" style="background: rgba(212, 116, 95, 0.03);">
+        <div class="container">
+            <h2 class="section-title">Faça o Teste VVIQ e Descubra</h2>
+            <div class="quiz-container">
+                <div class="quiz-intro">
+                    <p><strong>VVIQ (Vividness of Visual Imagery Questionnaire)</strong> é um teste desenvolvido por David Marks em 1973 para medir a vivacidade da imaginação visual.</p>
+                    <p>Para cada pergunta, avalie a clareza e vivacidade da imagem que você consegue formar mentalmente, considerando:</p>
+                    <p style="font-weight: 500; color: var(--color-primary);">5 = Perfeitamente claro e vívido como ver de verdade<br>
+                    4 = Claro e razoavelmente vívido<br>
+                    3 = Moderadamente claro e vívido<br>
+                    2 = Vago e impreciso<br>
+                    1 = Nenhuma imagem, você apenas "sabe" que está pensando no objeto</p>
+                </div>
+
+                <form id="vviq-form">
+                    <div class="question">
+                        <div class="question-text">1. Pense em um amigo ou parente próximo. Visualize o formato de seu rosto.</div>
+                        <div class="options">
+                            <label class="option">
+                                <input type="radio" name="q1" value="5" required>
+                                <span>5 - Perfeitamente claro e vívido</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q1" value="4">
+                                <span>4 - Claro e razoavelmente vívido</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q1" value="3">
+                                <span>3 - Moderadamente claro</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q1" value="2">
+                                <span>2 - Vago e impreciso</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q1" value="1">
+                                <span>1 - Nenhuma imagem</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <div class="question-text">2. Imagine o sol nascendo acima do horizonte em um céu claro.</div>
+                        <div class="options">
+                            <label class="option">
+                                <input type="radio" name="q2" value="5" required>
+                                <span>5 - Perfeitamente claro e vívido</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q2" value="4">
+                                <span>4 - Claro e razoavelmente vívido</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q2" value="3">
+                                <span>3 - Moderadamente claro</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q2" value="2">
+                                <span>2 - Vago e impreciso</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q2" value="1">
+                                <span>1 - Nenhuma imagem</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <div class="question-text">3. Pense em uma vitrine de loja que você conhece bem. Visualize as cores dos produtos.</div>
+                        <div class="options">
+                            <label class="option">
+                                <input type="radio" name="q3" value="5" required>
+                                <span>5 - Perfeitamente claro e vívido</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q3" value="4">
+                                <span>4 - Claro e razoavelmente vívido</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q3" value="3">
+                                <span>3 - Moderadamente claro</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q3" value="2">
+                                <span>2 - Vago e impreciso</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q3" value="1">
+                                <span>1 - Nenhuma imagem</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <div class="question-text">4. Imagine uma paisagem rural com árvores, montanhas e um lago.</div>
+                        <div class="options">
+                            <label class="option">
+                                <input type="radio" name="q4" value="5" required>
+                                <span>5 - Perfeitamente claro e vívido</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q4" value="4">
+                                <span>4 - Claro e razoavelmente vívido</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q4" value="3">
+                                <span>3 - Moderadamente claro</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q4" value="2">
+                                <span>2 - Vago e impreciso</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q4" value="1">
+                                <span>1 - Nenhuma imagem</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <div class="question-text">5. Visualize uma rosa vermelha em um vaso. Concentre-se nos detalhes das pétalas.</div>
+                        <div class="options">
+                            <label class="option">
+                                <input type="radio" name="q5" value="5" required>
+                                <span>5 - Perfeitamente claro e vívido</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q5" value="4">
+                                <span>4 - Claro e razoavelmente vívido</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q5" value="3">
+                                <span>3 - Moderadamente claro</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q5" value="2">
+                                <span>2 - Vago e impreciso</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q5" value="1">
+                                <span>1 - Nenhuma imagem</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-calculate">Calcular Resultado</button>
+                </form>
+
+                <div id="result" class="result">
+                    <h3>Seu Resultado</h3>
+                    <div class="result-score" id="score"></div>
+                    <div class="result-interpretation" id="interpretation"></div>
+                </div>
+
+                <div id="user-form" class="user-form">
+                    <h3>Compartilhe Sua Experiência</h3>
+                    <p>Gostaríamos de conhecer você melhor e entender sua experiência com afantasia. Seus dados nos ajudarão a construir uma comunidade mais forte e informada.</p>
+                    
+                    <form id="contact-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Nome *</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="age">Idade *</label>
+                                <input type="number" id="age" name="age" min="1" max="120" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">E-mail *</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="profession">Profissão *</label>
+                                <input type="text" id="profession" name="profession" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="experience">Conte-nos sobre sua experiência com afantasia *</label>
+                            <textarea id="experience" name="experience" placeholder="Como foi descobrir que você tem afantasia? Como isso afeta seu dia a dia? Compartilhe suas reflexões..." required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn-submit">Enviar e Participar da Comunidade</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2 class="cta-title">Junte-se à Comunidade</h2>
+            <p class="cta-description">Conecte-se com outras pessoas que têm afantasia, compartilhe experiências e aprenda mais sobre como funciona a mente sem imagens mentais.</p>
+            <a href="https://chat.whatsapp.com/KnlnVNqrmKRLeFK5m0DfYg" class="whatsapp-btn" target="_blank" rel="noopener noreferrer">
+                <svg class="whatsapp-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                </svg>
+                Entrar no Grupo do WhatsApp
+            </a>
+        </div>
+    </section>
+
+    <section class="references-section">
+        <div class="container">
+            <h2 class="section-title">Referências & Leituras</h2>
+            <div class="references-grid">
+                <div class="reference-card">
+                    <h3>Aphantasia Network</h3>
+                    <p>Comunidade internacional de pessoas com afantasia, com recursos, pesquisas e fóruns de discussão.</p>
+                    <a href="https://aphantasia.com/" target="_blank" rel="noopener noreferrer">
+                        Visitar site →
+                    </a>
+                </div>
+
+                <div class="reference-card">
+                    <h3>Artigo Científico Original</h3>
+                    <p>Zeman et al. (2015) - "Loss of imagery phenomenology with intact visuo-spatial task performance"</p>
+                    <a href="https://www.sciencedirect.com/science/article/pii/S0028393215001401" target="_blank" rel="noopener noreferrer">
+                        Ler artigo →
+                    </a>
+                </div>
+
+                <div class="reference-card">
+                    <h3>BBC Future</h3>
+                    <p>Artigo explicativo sobre afantasia e seus impactos na vida cotidiana e criatividade.</p>
+                    <a href="https://www.bbc.com/future/article/20210716-aphantasia-the-people-who-cant-create-mental-images" target="_blank" rel="noopener noreferrer">
+                        Ler mais →
+                    </a>
+                </div>
+
+                <div class="reference-card">
+                    <h3>VVIQ Original</h3>
+                    <p>Marks, D.F. (1973) - Visual imagery differences in the recall of pictures.</p>
+                    <a href="https://journals.sagepub.com/doi/10.1111/j.2044-8295.1973.tb01322.x" target="_blank" rel="noopener noreferrer">
+                        Acessar pesquisa →
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>Este site é um recurso informativo sobre afantasia. Não substitui diagnóstico ou aconselhamento médico profissional.</p>
+        <p style="margin-top: 1rem; opacity: 0.6;">© 2026 - Conteúdo educacional sobre Afantasia</p>
+    </footer>
+
+    <script>
+        // Animação de seleção de opções
+        document.querySelectorAll('.option').forEach(option => {
+            option.addEventListener('click', function() {
+                const questionOptions = this.closest('.options').querySelectorAll('.option');
+                questionOptions.forEach(opt => opt.classList.remove('selected'));
+                this.classList.add('selected');
+            });
+        });
+
+        // Cálculo do VVIQ
+        document.getElementById('vviq-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            let total = 0;
+            for (let i = 1; i <= 5; i++) {
+                const value = document.querySelector(`input[name="q${i}"]:checked`).value;
+                total += parseInt(value);
+            }
+            
+            const resultDiv = document.getElementById('result');
+            const scoreDiv = document.getElementById('score');
+            const interpretationDiv = document.getElementById('interpretation');
+            const userFormDiv = document.getElementById('user-form');
+            
+            scoreDiv.textContent = total + ' pontos';
+            
+            let interpretation = '';
+            let hasAphantasia = false;
+            
+            if (total >= 5 && total <= 15) {
+                hasAphantasia = true;
+                interpretation = `<p><strong>Você provavelmente tem Afantasia</strong></p>
+                <p>Sua pontuação sugere fortemente que você tem afantasia. Isso significa que você tem pouca ou nenhuma capacidade de criar imagens mentais voluntárias quando tenta visualizar algo.</p>
+                <p>Isso não é uma deficiência ou problema — é simplesmente uma forma diferente de processar pensamentos. Muitas pessoas com afantasia são extremamente criativas, bem-sucedidas e têm memórias funcionais. A diferença está em <em>como</em> você pensa, não na qualidade do seu pensamento.</p>
+                <p><strong>Você provavelmente:</strong></p>
+                <ul style="margin-left: 1.5rem; margin-top: 1rem;">
+                    <li>Pensa em conceitos e fatos, não em imagens</li>
+                    <li>Tem dificuldade em reconhecer rostos ou se lembrar de detalhes visuais</li>
+                    <li>Não "revive" memórias visualmente, mas sabe que elas aconteceram</li>
+                    <li>Não sonha com imagens ou não se lembra dos sonhos</li>
+                </ul>`;
+            } else if (total >= 16 && total <= 20) {
+                interpretation = `<p><strong>Imaginação Visual Limitada</strong></p>
+                <p>Sua pontuação indica que você tem alguma capacidade de visualização mental, mas ela é vaga ou pouco clara. Suas imagens mentais podem ser fracas, imprecisas ou difíceis de manter.</p>
+                <p>Você pode se situar em um espectro entre a afantasia completa e a visualização típica. Algumas pessoas com pontuações nessa faixa descrevem suas imagens mentais como "sombras" ou "contornos" ao invés de imagens vívidas.</p>`;
+            } else {
+                interpretation = `<p><strong>Imaginação Visual Normal a Forte</strong></p>
+                <p>Sua pontuação sugere que você tem boa capacidade de criar imagens mentais. Você provavelmente consegue visualizar cenas, objetos e pessoas com clareza razoável a excelente.</p>
+                <p>Isso é típico da maioria da população e indica que sua "tela mental" funciona conforme esperado. Você consegue "ver" as coisas na sua mente quando tenta imaginá-las.</p>`;
+            }
+            
+            interpretationDiv.innerHTML = interpretation;
+            resultDiv.classList.add('show');
+            resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            
+            // Mostrar formulário apenas se houver afantasia
+            if (hasAphantasia) {
+                setTimeout(() => {
+                    userFormDiv.classList.add('show');
+                    userFormDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }, 800);
+            } else {
+                userFormDiv.classList.remove('show');
+            }
+        });
+
+        // Processar envio do formulário de contato
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData();
+            
+            // IDs dos campos do Google Form
+            formData.append('entry.175242099', document.getElementById('name').value); // Nome
+            formData.append('entry.1376611797', document.getElementById('age').value); // Idade
+            formData.append('entry.482484694', document.getElementById('email').value); // E-mail
+            formData.append('entry.1336618230', document.getElementById('profession').value); // Profissão
+            formData.append('entry.41183087', document.getElementById('experience').value); // Relato
+            
+            // URL do Google Form
+            const googleFormURL = 'https://docs.google.com/forms/d/e/1FAIpQLSc8Z1QhQMJWOk90oD9F2hUVOPCKjaeGU8ExzZSQSgWHqu-dCw/formResponse';
+            
+            // Enviar para o Google Forms
+            fetch(googleFormURL, {
+                method: 'POST',
+                mode: 'no-cors',
+                body: formData
+            }).then(() => {
+                // Feedback visual
+                const btn = document.querySelector('.btn-submit');
+                const originalText = btn.textContent;
+                btn.textContent = '✓ Enviado com sucesso!';
+                btn.style.background = '#4CAF50';
+                
+                setTimeout(() => {
+                    alert('Obrigado por compartilhar! Em breve você receberá o convite para o grupo do WhatsApp no seu e-mail.');
+                    // Reset do formulário
+                    document.getElementById('contact-form').reset();
+                    btn.textContent = originalText;
+                    btn.style.background = '';
+                }, 1000);
+            }).catch(error => {
+                console.error('Erro:', error);
+                alert('Ops! Houve um erro ao enviar. Por favor, tente novamente.');
+            });
+        });
+
+        // Smooth scroll para indicador
+        document.querySelector('.scroll-indicator').addEventListener('click', function() {
+            document.querySelector('.section').scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
