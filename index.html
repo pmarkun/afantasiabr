@@ -826,8 +826,8 @@
                     <h3>Compartilhe Sua Experiência (opcional)</h3>
                     <p>Gostaríamos de conhecer você melhor e entender sua experiência com afantasia. Seus dados nos ajudarão a construir uma comunidade mais forte e informada.</p>
                     
-                <form id="contact-form">
-                    <input type="hidden" id="vviq-result" name="entry.1129656737" value="">
+                    <form id="contact-form" accept-charset="UTF-8">
+                    <input type="hidden" id="vviq-result" name="result" value="">
                     <div class="form-row">
                             <div class="form-group">
                                 <label for="name">Nome *</label>
@@ -995,36 +995,42 @@
         });
 
         // Processar envio do formulário de contato
-        document.getElementById('contact-form').addEventListener('submit', function(e) {
+        const contactForm = document.getElementById('contact-form');
+        const scriptUrl = 'COLE_AQUI_A_URL_DO_WEB_APP';
+
+        contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            
-            const formData = new FormData();
-            
-            // IDs dos campos do Google Form
-            formData.append('entry.175242099', document.getElementById('name').value); // Nome
-            formData.append('entry.1376611797', document.getElementById('age').value); // Idade
-            formData.append('entry.482484694', document.getElementById('email').value); // E-mail
-            formData.append('entry.1336618230', document.getElementById('profession').value); // Profissão
-            formData.append('entry.41183087', document.getElementById('experience').value); // Relato
-            
-            // URL do Google Form
-            const googleFormURL = 'https://docs.google.com/forms/d/e/1FAIpQLSc8Z1QhQMJWOk90oD9F2hUVOPCKjaeGU8ExzZSQSgWHqu-dCw/formResponse';
-            
-            // Enviar para o Google Forms
-            fetch(googleFormURL, {
+
+            const btn = document.querySelector('.btn-submit');
+            btn.textContent = '✓ Enviando...';
+            btn.style.background = '#4CAF50';
+
+            const payload = {
+                result: document.getElementById('vviq-result').value,
+                name: document.getElementById('name').value,
+                age: document.getElementById('age').value,
+                email: document.getElementById('email').value,
+                profession: document.getElementById('profession').value,
+                experience: document.getElementById('experience').value,
+                submittedAt: new Date().toISOString()
+            };
+
+            fetch(scriptUrl, {
                 method: 'POST',
                 mode: 'no-cors',
-                body: formData
+                headers: {
+                    'Content-Type': 'text/plain;charset=utf-8'
+                },
+                body: JSON.stringify(payload)
             }).then(() => {
-                const btn = document.querySelector('.btn-submit');
                 btn.textContent = '✓ Enviado com sucesso!';
-                btn.style.background = '#4CAF50';
-
                 setTimeout(() => {
                     window.location.href = 'https://chat.whatsapp.com/KnlnVNqrmKRLeFK5m0DfYg';
-                }, 900);
+                }, 800);
             }).catch(error => {
                 console.error('Erro:', error);
+                btn.textContent = 'Enviar e Participar da Comunidade';
+                btn.style.background = '';
                 alert('Ops! Houve um erro ao enviar. Por favor, tente novamente.');
             });
         });
