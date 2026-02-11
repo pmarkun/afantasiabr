@@ -108,6 +108,39 @@
             animation: fadeInUp 1s ease-out;
         }
 
+        .hero-actions {
+            margin-top: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .btn-hero {
+            padding: 0.95rem 2.5rem;
+            border-radius: 999px;
+            background: linear-gradient(135deg, var(--color-accent), #f28f6b);
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 10px 25px rgba(212, 116, 95, 0.35);
+        }
+
+        .btn-hero:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(212, 116, 95, 0.45);
+        }
+
+        .hero-note {
+            font-size: 0.9rem;
+            color: var(--color-text-muted);
+            font-style: italic;
+        }
+
         .hero-label {
             font-size: 0.75rem;
             letter-spacing: 0.2em;
@@ -567,6 +600,14 @@
             left: 50%;
             transform: translateX(-50%);
             animation: bounce 2s infinite;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.85rem;
+            color: var(--color-accent);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
         }
 
         @keyframes bounce {
@@ -597,10 +638,15 @@
             <div class="hero-label">Descubra Agora</div>
             <h1>Você Tem Afantasia?</h1>
             <p class="hero-subtitle">Não consegue visualizar imagens na sua mente? Você não está sozinho.</p>
+            <div class="hero-actions">
+                <a class="btn-hero" href="#teste">Faça o teste</a>
+                <span class="hero-note">Comece respondendo o VVIQ abaixo</span>
+            </div>
         </div>
         <div class="scroll-indicator">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="6 9 12 15 18 9"></polyline>
+            <span>Role para ver o teste</span>
+            <svg viewBox="0 0 32 32" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="8 12 16 20 24 12"></polyline>
             </svg>
         </div>
     </section>
@@ -622,7 +668,7 @@
         </div>
     </section>
 
-    <section class="section" style="background: rgba(212, 116, 95, 0.03);">
+    <section class="section" id="teste" style="background: rgba(212, 116, 95, 0.03);">
         <div class="container">
             <h2 class="section-title">Faça o Teste VVIQ e Descubra</h2>
             <div class="quiz-container">
@@ -976,7 +1022,10 @@
 
         // Smooth scroll para indicador
         document.querySelector('.scroll-indicator').addEventListener('click', function() {
-            document.querySelector('.section').scrollIntoView({ behavior: 'smooth' });
+            const quizSection = document.querySelector('#teste');
+            if (quizSection) {
+                quizSection.scrollIntoView({ behavior: 'smooth' });
+            }
         });
     </script>
 </body>
