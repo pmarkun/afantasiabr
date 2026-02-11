@@ -826,8 +826,9 @@
                     <h3>Compartilhe Sua Experiência (opcional)</h3>
                     <p>Gostaríamos de conhecer você melhor e entender sua experiência com afantasia. Seus dados nos ajudarão a construir uma comunidade mais forte e informada.</p>
                     
-                    <form id="contact-form">
-                        <div class="form-row">
+                <form id="contact-form">
+                    <input type="hidden" id="vviq-result" name="entry.1129656737" value="">
+                    <div class="form-row">
                             <div class="form-group">
                                 <label for="name">Nome *</label>
                                 <input type="text" id="name" name="name" required>
@@ -942,14 +943,17 @@
             const scoreDiv = document.getElementById('score');
             const interpretationDiv = document.getElementById('interpretation');
             const userFormDiv = document.getElementById('user-form');
+            const resultInput = document.getElementById('vviq-result');
             
             scoreDiv.textContent = total + ' pontos';
             
             let interpretation = '';
             let hasAphantasia = false;
+            let summaryLabel = '';
             
             if (total >= 5 && total <= 15) {
                 hasAphantasia = true;
+                summaryLabel = 'Provável Afantasia';
                 interpretation = `<p><strong>Você provavelmente tem Afantasia</strong></p>
                 <p>Sua pontuação sugere fortemente que você tem afantasia. Isso significa que você tem pouca ou nenhuma capacidade de criar imagens mentais voluntárias quando tenta visualizar algo.</p>
                 <p>Isso não é uma deficiência ou problema — é simplesmente uma forma diferente de processar pensamentos. Muitas pessoas com afantasia são extremamente criativas, bem-sucedidas e têm memórias funcionais. A diferença está em <em>como</em> você pensa, não na qualidade do seu pensamento.</p>
@@ -961,16 +965,21 @@
                     <li>Não sonha com imagens ou não se lembra dos sonhos</li>
                 </ul>`;
             } else if (total >= 16 && total <= 20) {
+                summaryLabel = 'Imaginação visual limitada';
                 interpretation = `<p><strong>Imaginação Visual Limitada</strong></p>
                 <p>Sua pontuação indica que você tem alguma capacidade de visualização mental, mas ela é vaga ou pouco clara. Suas imagens mentais podem ser fracas, imprecisas ou difíceis de manter.</p>
                 <p>Você pode se situar em um espectro entre a afantasia completa e a visualização típica. Algumas pessoas com pontuações nessa faixa descrevem suas imagens mentais como "sombras" ou "contornos" ao invés de imagens vívidas.</p>`;
             } else {
+                summaryLabel = 'Imaginação visual normal a forte';
                 interpretation = `<p><strong>Imaginação Visual Normal a Forte</strong></p>
                 <p>Sua pontuação sugere que você tem boa capacidade de criar imagens mentais. Você provavelmente consegue visualizar cenas, objetos e pessoas com clareza razoável a excelente.</p>
                 <p>Isso é típico da maioria da população e indica que sua "tela mental" funciona conforme esperado. Você consegue "ver" as coisas na sua mente quando tenta imaginá-las.</p>`;
             }
             
             interpretationDiv.innerHTML = interpretation;
+            if (resultInput) {
+                resultInput.value = `${total} pontos — ${summaryLabel}`;
+            }
             resultDiv.classList.add('show');
             resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
             
