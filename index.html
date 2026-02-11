@@ -777,7 +777,7 @@
                 </div>
 
                 <div id="user-form" class="user-form">
-                    <h3>Compartilhe Sua Experiência</h3>
+                    <h3>Compartilhe Sua Experiência (opcional)</h3>
                     <p>Gostaríamos de conhecer você melhor e entender sua experiência com afantasia. Seus dados nos ajudarão a construir uma comunidade mais forte e informada.</p>
                     
                     <form id="contact-form">
@@ -961,19 +961,13 @@
                 mode: 'no-cors',
                 body: formData
             }).then(() => {
-                // Feedback visual
                 const btn = document.querySelector('.btn-submit');
-                const originalText = btn.textContent;
                 btn.textContent = '✓ Enviado com sucesso!';
                 btn.style.background = '#4CAF50';
-                
+
                 setTimeout(() => {
-                    alert('Obrigado por compartilhar! Em breve você receberá o convite para o grupo do WhatsApp no seu e-mail.');
-                    // Reset do formulário
-                    document.getElementById('contact-form').reset();
-                    btn.textContent = originalText;
-                    btn.style.background = '';
-                }, 1000);
+                    window.location.href = 'https://chat.whatsapp.com/KnlnVNqrmKRLeFK5m0DfYg';
+                }, 900);
             }).catch(error => {
                 console.error('Erro:', error);
                 alert('Ops! Houve um erro ao enviar. Por favor, tente novamente.');
